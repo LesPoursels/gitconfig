@@ -1,0 +1,27 @@
+[credential]
+	helper = cache --timeout=1296000
+
+[diff]
+    mnemonicprefix = true
+
+[push]
+    default = simple
+
+[url "https://github.com/"]
+    insteadOf = gh:
+
+[alias]
+    s = status
+    co = checkout
+    dm = diff --minimal
+    amend = commit --amend
+    unstage = reset HEAD
+    root = rev-parse --show-toplevel
+    uncommit = reset HEAD~1
+    redev = rebase -i develop
+    delrem = push --delete
+    find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
+    show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
+
+[rebase]
+	autosquash = true
